@@ -1,0 +1,9 @@
+{% extends 'index.html' %}
+
+{% block body %}
+    <ul>
+        {% for article in articles %}
+        <li><a href="{% url 'detailpost' article.id %}">{{ article.title }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

@@ -1,8 +1,16 @@
 {% extends 'index.html' %}
-
+{% load static %}
 {% block body %}
     <h2>{{ object.title }}</h2>
+    <h4>{{ object.author }}</h4>
     <p>{{ object.post }}</p>
-    <button type="submit" onclick='window.location.href="{% url 'updatepost' object.id %}"'>Update</button>
-    <button type="submit" onclick='window.location.href="{% url 'deletepost' object.id %}"'>Delete</button>
+    
+    <button type="submit" onclick='window.location.href="{% url 'updatepost' object.id %}"'>
+        Update
+    </button>
+    
+    <button type="submit" onclick='window.location.href="{% url 'deletepost' object.id %}"'>
+        Delete
+    </button>
+
 {% endblock %}

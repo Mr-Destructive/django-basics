@@ -1,10 +1,12 @@
 from django.views.generic.edit import ( 
-    CreateView, UpdateView, DeleteView )
+    CreateView, 
+    UpdateView, 
+    DeleteView 
+    )
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from .models import Article
 from .forms import ArticleForm
-import json
 
 class ArticleView(ListView):
     model = Article
@@ -12,7 +14,7 @@ class ArticleView(ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['articles'] = Article.objects.all()
+        context['articles'] = Article.objects.filter(author=self.request.user)
         return context
 
 class ArticleDetailView(DetailView):
@@ -37,7 +39,6 @@ class ArticleUpdateView(UpdateView):
         form.instance.author = self.request.user
         return super(ArticleUpdateView, self).form_valid(form)
 
-
 class ArticleDeleteView(DeleteView):
     model = Article
     form_class = ArticleForm
@@ -46,4 +47,3 @@ class ArticleDeleteView(DeleteView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super(ArticleDeleteView, self).form_valid(form)
-

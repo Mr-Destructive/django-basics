@@ -1,8 +1,8 @@
-{% extends 'base.html' %}
+{% extends 'index.html' %}
 
 {% block body %}
 
-<h2>Delete Task</h2>
+<h2>Delete Article</h2>
 <form method="POST" >
     {% csrf_token %}
     <input type="submit" name="Delete"/>

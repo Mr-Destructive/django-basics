@@ -20,7 +20,7 @@ class CreateArticle(APIView):
         serializer = ArticleSerializer(data = request.data)
         if(serializer.is_valid()):
             serializer.save(author=request.user)
-            return Response({'article':serializer.data}, template_name='drfapi/task.html')
+            return Response({'article':serializer.data}, template_name='drfapi/article.html')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -37,7 +37,7 @@ class UpdateArticle(APIView):
         serializer = ArticleSerializer(instance=task, data=request.data)
         if(serializer.is_valid()):
             serializer.save(author=request.user)
-            return Response({'tasks':serializer.data}, template_name='drfapi/task.html')
+            return Response({'tasks':serializer.data}, template_name='drfapi/article.html')
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class DeleteArticle(APIView):
@@ -68,5 +68,5 @@ class GetArticle(APIView):
     def get(self, request,pk , format=None):
         tasks = Article.objects.get(id=pk)
         serializer = ArticleSerializer(tasks, many=False)
-        return Response({'article':serializer.data}, template_name='drfapi/task.html')
+        return Response({'article':serializer.data}, template_name='drfapi/article.html')
 
